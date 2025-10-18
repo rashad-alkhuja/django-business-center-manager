@@ -1,0 +1,25 @@
+<!-- templates/bookings/usage_report.html -->
+{% extends 'bookings/base_bookings.html' %}
+
+{% block title %}Monthly Usage Report{% endblock %}
+
+{% block content %}
+<div class="booking-container">
+    <div class="report-header">
+        <h1>Meeting Room Usage Report</h1>
+        <p>Showing total hours booked per office for the current month. Resets automatically.</p>
+    </div>
+    <table class="styled-table" id="usage-report-table">
+        <thead>
+            <tr>
+                <th>Office Number</th>
+                <th>Total Hours Booked This Month</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be inserted here by JavaScript -->
+            <tr><td colspan="2">Loading report...</td></tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}

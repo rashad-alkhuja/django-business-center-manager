@@ -1,0 +1,14 @@
+<!-- templates/offices/statistics.html -->
+{% extends 'offices/base_with_nav.html' %} {# We will create this base template next #}
+
+{% block title %}Occupancy Statistics{% endblock %}
+
+{% block content %}
+<div class="stats-container">
+    <h2>Occupancy Statistics</h2>
+    <div class="chart-container">
+        <canvas id="occupancyChart"></canvas>
+    </div>
+    <!-- You can add more charts and data tables here in the future -->
+</div>
+{% endblock %}

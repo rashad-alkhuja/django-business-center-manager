@@ -1,0 +1,52 @@
+<!-- templates/bookings/reception_dashboard.html -->
+{% extends 'bookings/base_bookings.html' %}
+
+{% block title %}Reception Dashboard{% endblock %}
+
+{% block content %}
+<div class="booking-container">
+    <div class="header-actions" style="display: flex; justify-content: space-between; align-items: center;">
+        <h1>Upcoming Bookings</h1>
+        <a href="{% url 'booking-calendar' %}" class="btn-secondary">Back to Calendar</a>
+    </div>
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Room</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Booked By</th>
+                <!-- === ADD THE NEW COLUMN HEADER === -->
+                <th>Associated Office</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in upcoming_bookings %}
+                <tr>
+                    <td>{{ booking.title }}</td>
+                    <td>{{ booking.meeting_room.name }}</td>
+                    <td>{{ booking.start_time|date:"Y-m-d H:i" }}</td>
+                    <td>{{ booking.end_time|date:"Y-m-d H:i" }}</td>
+                    <td>{{ booking.booked_by.username }}</td>
+                    
+                    <!-- === ADD THE NEW COLUMN DATA === -->
+                    <td>
+                        {% if booking.associated_office %}
+                            Office {{ booking.associated_office.office_number }}
+                        {% else %}
+                            <span style="color: #888;">N/A</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <!-- Update colspan to account for the new column -->
+                    <td colspan="6">No upcoming bookings.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

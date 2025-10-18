@@ -1,0 +1,21 @@
+<!-- templates/bookings/booking_calendar.html -->
+{% extends 'bookings/base_bookings.html' %}
+
+{% block title %}Calendar{% endblock %}
+
+{% block content %}
+<div class="booking-container">
+    <div class="calendar-nav">
+        <a href="{{ prev_week_url }}" class="nav-button">&laquo; Previous Week</a>
+        <h2>{{ current_week_str }}</h2>
+        <a href="{{ next_week_url }}" class="nav-button">Next Week &raquo;</a>
+    </div>
+    <div class="header-actions">
+        <a href="{% url 'create-booking' %}" class="btn-primary"><i class="fa-solid fa-plus"></i> New Booking</a>
+    </div>
+    
+    <table class="calendar">
+        <!-- ... The calendar table from the previous version goes here ... -->
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+# Git Ignore for Django Projects
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+
+# Database
+db.sqlite3
+
+# Django project settings
+# IMPORTANT: You can add your local settings file here if you create one
+# local_settings.py
+
+# Static files collected by collectstatic
+staticfiles/
+
+# Media files
+mediafiles/
+
+# IDE / Editor folders
+.idea/
+.vscode/
+*.swp
+
+# OS generated files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,45 @@
+<!-- templates/bookings/base_bookings.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Booking System{% endblock %} - Business Center</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <!-- We will create this new CSS file -->
+    <link rel="stylesheet" href="{% static 'bookings/css/booking_style.css' %}">
+</head>
+<body>
+    <!-- Re-use the same navbar from the offices app for consistency -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a class="nav-brand" href="{% url 'dashboard' %}">
+                <img src="{% static 'offices/images/Rahet-Logo.png' %}" alt="Logo" class="nav-logo">
+            </a>
+            <div class="nav-links">
+                <a href="{% url 'floor-plan' %}">Floor Plan</a>
+                <a href="{% url 'office-stats-page' %}">Statistics</a>
+                <a href="{% url 'booking-calendar' %}">Bookings</a>
+                <a href="{% url 'dashboard' %}">Dashboard</a>
+            </div>
+            <div class="nav-user">
+                <span>{{ user.username }}</span>
+                <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-button" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content-area">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- We will create this new JS file -->
+    <script src="{% static 'bookings/js/booking_logic.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!-- templates/bookings/create_booking.html -->
+{% extends 'bookings/base_bookings.html' %}
+
+{% block title %}New Booking{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h1>Create New Booking</h1>
+    <p>All fields are required. Please ensure the time slot is not already taken.</p>
+    <form method="post" class="booking-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-actions">
+            <a href="{% url 'booking-calendar' %}" class="btn-secondary">Cancel</a>
+            <button type="submit" class="btn-primary">Save Booking</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,128 @@
+<!-- templates/core/login.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Business Center</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+   .login-logo {
+    max-width: 400px; /* Changed from 200px to 400px */
+    width: 100%; /* Ensures it scales down on very small screens */
+    height: auto; /* Maintains the aspect ratio */
+    margin: 0 auto 25px auto; /* Top, Right, Bottom, Left margins */
+    display: block; /* Centers the image */}
+        .login-container h2 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            
+            
+        }
+        
+        /* Form Styling */
+        .login-form p {
+            text-align: left;
+            margin-bottom: 1.5em;
+        }
+        .login-form label {
+            display: none; /* Hide default labels, use placeholders */
+        }
+        .login-form input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box; /* Important for padding */
+        }
+        .login-form input::placeholder {
+            color: #999;
+        }
+        
+        /* Error Message Styling */
+        .error-message {
+            background-color: #ffe8e9;
+            color: #d9534f;
+            border: 1px solid #d9534f;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .error-message ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        /* Button Styling */
+        .login-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4c2a85; /* Same dark purple as navbar */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .login-button:hover {
+            background-color: #3b206b; /* Slightly darker on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <img src="{% static 'offices/images/Rahet-Logo.png' %}" alt="Rahet Albal Logo" class="login-logo">
+        <h2>System Login</h2>
+
+        <!-- This block checks for and displays any form errors (e.g., "invalid username or password") -->
+        {% if form.errors %}
+            <div class="error-message">
+                <p>Please correct the error below:</p>
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        <form method="post" class="login-form">
+            {% csrf_token %}
+            
+            <!-- We will manually render the fields to add placeholders -->
+            <p>
+                <input type="text" name="username" id="id_username" placeholder="Username" required>
+            </p>
+            <p>
+                <input type="password" name="password" id="id_password" placeholder="Password" required>
+            </p>
+            
+            <button type="submit" class="login-button">Login</button>
+        </form>
+    </div>
+
+</body>
+</html>
