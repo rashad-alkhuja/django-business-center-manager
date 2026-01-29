@@ -6,21 +6,24 @@ body {
     background-color: #f4f7f6;
     color: #333;
     margin: 0;
-    padding-top: 80px; /* IMPORTANT: Space for the fixed navbar */
+    padding-top: 80px;
+    /* IMPORTANT: Space for the fixed navbar */
 }
 
 /* --- Professional Navbar Styling --- */
 .navbar {
-    background-color: #4c2a85; /* Dark Purple */
+    background-color: #4c2a85;
+    /* Dark Purple */
     padding: 0 2em;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     box-sizing: border-box;
 }
+
 .nav-container {
     display: flex;
     justify-content: space-between;
@@ -30,20 +33,26 @@ body {
     margin: 0 auto;
     height: 70px;
 }
+
 .nav-brand {
     display: flex;
     align-items: center;
     text-decoration: none;
 }
+
 .nav-logo {
-    height: 50px; /* Adjust size as needed */
+    height: 50px;
+    /* Adjust size as needed */
     width: auto;
-    filter: brightness(0) invert(1); /* Makes the logo white */
+    filter: brightness(0) invert(1);
+    /* Makes the logo white */
 }
+
 .nav-links {
     display: flex;
     gap: 25px;
 }
+
 .nav-links a {
     color: #e0e0e0;
     text-decoration: none;
@@ -52,10 +61,13 @@ body {
     padding: 5px 10px;
     border-bottom: 2px solid transparent;
 }
-.nav-links a:hover, .nav-links a.active {
+
+.nav-links a:hover,
+.nav-links a.active {
     color: #fff;
     border-bottom: 2px solid #fff;
 }
+
 .nav-user {
     display: flex;
     align-items: center;
@@ -63,6 +75,7 @@ body {
     color: #fff;
     font-weight: 500;
 }
+
 .logout-button {
     background: none;
     border: none;
@@ -71,6 +84,7 @@ body {
     cursor: pointer;
     transition: color 0.2s ease;
 }
+
 .logout-button:hover {
     color: #fff;
 }
@@ -87,8 +101,9 @@ body {
     background-color: #fff;
     padding: 25px;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
+
 .floor-plan-header {
     display: flex;
     justify-content: space-between;
@@ -97,10 +112,28 @@ body {
     border-bottom: 1px solid #eee;
     padding-bottom: 15px;
 }
-.floor-plan-header h2 { margin: 0; color: #2c3e50; }
-.legend { display: flex; gap: 20px; }
-.legend-item { display: flex; align-items: center; gap: 5px; }
-.legend-color { width: 15px; height: 15px; border-radius: 3px; }
+
+.floor-plan-header h2 {
+    margin: 0;
+    color: #2c3e50;
+}
+
+.legend {
+    display: flex;
+    gap: 20px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.legend-color {
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+}
 
 .floor-plan {
     position: relative;
@@ -111,50 +144,161 @@ body {
     background-size: 100% 100%;
     border: 1px solid #ddd;
     margin: 0 auto;
+
 }
-#loading-indicator { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 1.2em; color: #888; }
+
+#loading-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2em;
+    color: #888;
+}
 
 
 /* --- Office Div Styles --- */
 .office {
-    position: absolute; display: flex; align-items: center; justify-content: center;
-    color: white; font-weight: bold; font-size: 12px;
-    border: 1px solid rgba(0,0,0,0.5); box-sizing: border-box;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
     transition: all 0.2s ease-in-out;
 }
-.office:hover { transform: scale(1.1); z-index: 5; box-shadow: 0 0 15px rgba(0,0,0,0.4); cursor: pointer; }
-.available { background-color: rgba(39, 174, 96, 0.75); }
-.rented { background-color: rgba(231, 76, 60, 0.75); }
+
+.office:hover {
+    transform: scale(1.1);
+    z-index: 5;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+
+.available {
+    background-color: rgba(39, 174, 96, 0.75);
+}
+
+.rented {
+    background-color: rgba(231, 76, 60, 0.75);
+}
 
 
 /* --- Statistics Page --- */
-.stats-container { max-width: 800px; margin: 0 auto; text-align: center; }
-.chart-container { width: 100%; max-width: 500px; margin: 30px auto; }
+.stats-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.chart-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 30px auto;
+}
 
 
 /* --- Tooltip & Modal Styles --- */
 #tooltip {
-    position: absolute; display: block; padding: 10px; background-color: white;
-    border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    font-size: 12px; z-index: 10; pointer-events: none; opacity: 0;
-    visibility: hidden; transition: opacity 0.2s ease-in-out;
+    position: absolute;
+    display: block;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: 12px;
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out;
 }
-#tooltip.visible { opacity: 1; visibility: visible; }
+
+#tooltip.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
 .modal-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); display: none;
-    justify-content: center; align-items: center; z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
 }
-.modal-overlay.visible { display: flex; }
+
+.modal-overlay.visible {
+    display: flex;
+}
+
 .modal {
-    background-color: white; padding: 30px; border-radius: 8px;
-    width: 90%; max-width: 500px; position: relative;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
+
 .modal-close {
-    position: absolute; top: 10px; right: 15px; font-size: 28px;
-    font-weight: bold; color: #aaa; background: none; border: none; cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
-#tenant-info-table { width: 100%; margin-top: 20px; border-collapse: collapse; }
-#tenant-info-table td { padding: 10px; border-top: 1px solid #eee; }
-#tenant-info-table td:first-child { font-weight: bold; color: #555; width: 40%; }
+
+#tenant-info-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+#tenant-info-table td {
+    padding: 10px;
+    border-top: 1px solid #eee;
+}
+
+#tenant-info-table td:first-child {
+    font-weight: bold;
+    color: #555;
+    width: 40%;
+}
+
+/* --- Download Button for Floor Plan Header --- */
+.download-btn {
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+    background-color: #4c2a85;
+    /* Matches your navbar */
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.download-btn:hover {
+    background-color: #3b206b;
+    /* Darker purple on hover */
+}
+
+.download-btn i {
+    margin-right: 5px;
+}

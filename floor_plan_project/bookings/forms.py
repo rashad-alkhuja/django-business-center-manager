@@ -32,9 +32,7 @@ class BookingForm(forms.ModelForm):
         self.fields['associated_office'].queryset = Office.objects.all().order_by('office_number')
         self.fields['associated_office'].label_from_instance = lambda obj: f"Office {obj.office_number}"
 
-        # If the user is a regular tenant, hide the 'associated_office' field
-        if user and user.groups.filter(name='Tenant').exists():
-            del self.fields['associated_office']
+        # The `Tenant` group has been removed; always show the 'associated_office' field
 
     def clean(self):
         cleaned_data = super().clean()

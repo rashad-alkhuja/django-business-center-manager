@@ -5,14 +5,12 @@ from django.views import View
 from django.utils import timezone
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.db.models import F, ExpressionWrapper, DurationField
+from django.db.models import F, ExpressionWrapper, DurationField, Sum, Q
 from django.db.models.functions import Coalesce
-from django.db.models import Sum, Q
-import datetime
-import uuid
-
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+import datetime
+import uuid
 
 from .models import MeetingRoom, Booking
 from .forms import BookingForm
@@ -20,7 +18,7 @@ from offices.models import Office
 
 def is_manager_or_reception(user):
     """Helper function to check if user is manager or reception"""
-    return user.is_superuser or user.groups.filter(name__in=['Manager', 'Reception']).exists()
+    return user.is_superuser or user.groups.filter(name__iregex=r'^(Manager|Reception)$').exists()
 
 # --- THIS VIEW HAS BEEN COMPLETELY REWRITTEN FOR ACCURACY AND EFFICIENCY ---
 class BookingCalendarView(LoginRequiredMixin, View):
@@ -96,12 +94,10 @@ class CreateBookingView(LoginRequiredMixin, View):
                 new_booking = form.save(commit=False)
                 new_booking.booked_by = request.user
 
-                # For tenants, automatically set their associated office
-                if request.user.groups.filter(name='Tenant').exists():
-                    # Try to find the office where this user is listed as contact person
-                    tenant_office = Office.objects.filter(contact_person=request.user).first()
-                    if tenant_office:
-                        new_booking.associated_office = tenant_office
+                # If this user is the contact person for an office, set associated office
+                tenant_office = Office.objects.filter(contact_person=request.user).first()
+                if tenant_office and not new_booking.associated_office:
+                    new_booking.associated_office = tenant_office
 
                 bookings_to_create.append(new_booking)
 
@@ -122,11 +118,10 @@ class CreateBookingView(LoginRequiredMixin, View):
                         recurrence_id=new_recurrence_id
                     )
 
-                    # For tenants, set their associated office for recurring bookings too
-                    if request.user.groups.filter(name='Tenant').exists():
-                        tenant_office = Office.objects.filter(contact_person=request.user).first()
-                        if tenant_office:
-                            new_booking.associated_office = tenant_office
+                    # If this user is the contact person for an office, set associated office
+                    tenant_office = Office.objects.filter(contact_person=request.user).first()
+                    if tenant_office:
+                        new_booking.associated_office = tenant_office
 
                     # If manager selected an office, use that instead
                     if form.cleaned_data.get('associated_office'):
@@ -147,7 +142,7 @@ class ReceptionDashboardView(LoginRequiredMixin, UserPassesTestMixin, View):
     
     def test_func(self):
         user = self.request.user
-        return user.is_superuser or user.groups.filter(name__in=['Manager', 'Reception']).exists()
+        return user.is_superuser or user.groups.filter(name__iregex=r'^(Manager|Reception)$').exists()
     
     def handle_no_permission(self):
         return redirect('dashboard')

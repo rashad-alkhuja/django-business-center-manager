@@ -1,9 +1,10 @@
 <!-- templates/offices/base_with_nav.html -->
 {% load static %}
-{% load auth_extras %}  <!-- Add this line at the top -->
+{% load auth_extras %} <!-- Add this line at the top -->
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Business Center{% endblock %}</title>
@@ -14,6 +15,7 @@
     <link rel="stylesheet" href="{% static 'offices/css/style.css' %}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
     <nav class="navbar">
         <div class="nav-container">
@@ -24,13 +26,18 @@
 
             <!-- Center: Navigation Links -->
             <div class="nav-links">
+                {% if user.is_superuser or user|has_group:"Manager" or user|has_group:"Reception" %}
+                <a href="{% url 'floor-plan' %}">Floor Plan</a>
+                {% endif %}
                 {% if user.is_superuser or user|has_group:"Manager" %}
-                    <a href="{% url 'floor-plan' %}">Floor Plan</a>
-                    <a href="{% url 'office-stats-page' %}">Statistics</a>
+                <a href="{% url 'office-stats-page' %}">Statistics</a>
+                {% endif %}
+                {% if user.is_superuser or user|has_group:"Manager" or user|has_group:"Accountant" %}
+                <a href="{% url 'cheque-dashboard' %}">Accounting</a>
                 {% endif %}
                 <a href="{% url 'booking-calendar' %}">Bookings</a>
                 {% if user.is_superuser or user|has_group:"Manager" or user|has_group:"Reception" %}
-                    <a href="{% url 'usage-report' %}">Usage Report</a>
+                <a href="{% url 'usage-report' %}">Usage Report</a>
                 {% endif %}
                 <a href="{% url 'dashboard' %}">Dashboard</a>
             </div>
@@ -51,8 +58,9 @@
     <main class="main-content-area">
         {% block content %}{% endblock %}
     </main>
-    
+
     <!-- We move the script to the end of the body for better performance -->
     <script src="{% static 'offices/js/main.js' %}"></script>
 </body>
+
 </html>

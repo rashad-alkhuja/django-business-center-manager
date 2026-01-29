@@ -1,37 +1,62 @@
 <!-- templates/offices/index.html -->
 {% extends 'offices/base_with_nav.html' %}
+{% load static %}
 
 {% block title %}Floor Plan{% endblock %}
 
 {% block content %}
-    <div class="floor-plan-container">
-        <div class="floor-plan-header">
+<div class="floor-plan-container">
+    <div class="floor-plan-header">
+        <div>
             <h2>Interactive Floor Plan</h2>
-            <div class="legend">
-                <div class="legend-item"><div class="legend-color available"></div><span>Available</span></div>
-                <div class="legend-item"><div class="legend-color rented"></div><span>Rented</span></div>
-            </div>
+            <a href="{% url 'download-available-offices' %}" class="download-btn">
+                <i class="fa-solid fa-file-pdf"></i> Download Available List
+            </a>
         </div>
-        
-        <div class="floor-plan">
-            <div id="loading-indicator">Loading Offices...</div>
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color available"></div><span>Available</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color rented"></div><span>Rented</span>
+            </div>
         </div>
     </div>
 
-    <div id="tooltip"></div>
-    <div id="tenant-modal-overlay" class="modal-overlay">
-        <div id="tenant-modal" class="modal">
-            <button id="modal-close-button" class="modal-close">&times;</button>
-            <h3>Tenant Information for Office #<span id="modal-office-number"></span></h3>
-            <table id="tenant-info-table">
-                <tbody>
-                    <tr><td>Company Name</td><td id="modal-company-name"></td></tr>
-                    <tr><td>Contact Person</td><td id="modal-contact-person"></td></tr>
-                    <tr><td>Email</td><td id="modal-email"></td></tr>
-                    <tr><td>Phone Number</td><td id="modal-phone"></td></tr>
-                    <tr><td>Contract Expiry</td><td id="modal-expiry"></td></tr>
-                </tbody>
-            </table>
-        </div>
+    <div class="floor-plan">
+        <div id="loading-indicator">Loading Offices...</div>
     </div>
+</div>
+
+<div id="tooltip"></div>
+<div id="tenant-modal-overlay" class="modal-overlay">
+    <div id="tenant-modal" class="modal">
+        <button id="modal-close-button" class="modal-close">&times;</button>
+        <h3>Tenant Information for Office #<span id="modal-office-number"></span></h3>
+        <table id="tenant-info-table">
+            <tbody>
+                <tr>
+                    <td>Company Name</td>
+                    <td id="modal-company-name"></td>
+                </tr>
+                <tr>
+                    <td>Contact Person</td>
+                    <td id="modal-contact-person"></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td id="modal-email"></td>
+                </tr>
+                <tr>
+                    <td>Phone Number</td>
+                    <td id="modal-phone"></td>
+                </tr>
+                <tr>
+                    <td>Contract Expiry</td>
+                    <td id="modal-expiry"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}

@@ -23,3 +23,4 @@ class Office(models.Model):
 
     def __str__(self):
         return f"Office {self.office_number}"
+

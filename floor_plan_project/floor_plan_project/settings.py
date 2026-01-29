@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'offices',
     'bookings',
     'core',
+    'accounting',
 
     # 3rd Party Apps
     'rest_framework',
